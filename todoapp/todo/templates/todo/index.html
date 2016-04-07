@@ -1,0 +1,12 @@
+<h3>Todo List</h3>
+<h>Tasks</h>
+
+{% if todo_list %}
+    <ul>
+    {% for task in todo_list %}
+        <li>{{ task.todo_text }} - {{task.add_date|date:"D d M Y"}}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tasks are available.</p>
+{% endif %}

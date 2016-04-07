@@ -13,3 +13,6 @@
 #Ignore all emacs files
 *#
 .#*
+
+#Ignore all database files
+*.sqlite3

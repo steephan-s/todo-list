@@ -9,7 +9,8 @@ class TaskAdmin(admin.ModelAdmin):
         ('Date information', {'fields': ['add_date']}),
     ]
     list_display = ('todo_text', 'add_date')
-    #list_filter = [timezone.now()]
-    
+    ordering = ['add_date']
+    list_filter = ['add_date']
+    search_fields = ['todo_text']
 
 admin.site.register(Task,TaskAdmin)

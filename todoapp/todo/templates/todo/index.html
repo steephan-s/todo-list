@@ -1,12 +1,20 @@
 <h3>Todo List</h3>
 <h>Tasks</h>
 
+<form action="{% url 'todo:push_function' %}" method="post">
+{% csrf_token %}
+        <input type="text" name="task_field" size=""><br />
+        <input type="date" name="date_field">
+        <input type="submit" value="Add" />
+</form>
+
 {% if todo_list %}
-    <ul>
+    <ol>
     {% for task in todo_list %}
-        <li>{{ task.todo_text }} - {{task.add_date|date:"D d M Y"}}</li>
+        <li>{{ task.todo_text }} - {{task.add_date|date:"D d M Y"}}
+</li>
     {% endfor %}
-    </ul>
+    </ol>
 {% else %}
     <p>No tasks are available.</p>
 {% endif %}

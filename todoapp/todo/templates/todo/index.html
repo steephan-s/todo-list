@@ -5,6 +5,7 @@
 {% csrf_token %}
         <input type="text" name="task_field" size=""><br />
         <input type="date" name="date_field">
+        
         <input type="submit" value="Add" />
 </form>
 
@@ -12,7 +13,9 @@
     <ol>
     {% for task in todo_list %}
         <li>{{ task.todo_text }} - {{task.add_date|date:"D d M Y"}}
+<a href="{% url "todo:delete" pk=task.id %}">Done</a>
 </li>
+</form>
     {% endfor %}
     </ol>
 {% else %}

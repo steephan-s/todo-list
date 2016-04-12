@@ -21,3 +21,8 @@ def push_function(request):
         return HttpResponseRedirect(reverse('todo:index'))
 
 
+def delete_function(request,pk):
+        t = Task.objects.get(pk=pk)
+        t.delete()
+        return HttpResponseRedirect(reverse('todo:index'))
+    

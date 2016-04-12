@@ -1,23 +1,29 @@
-<h3>Todo List</h3>
-<h>Tasks</h>
-
+<center><h3>Todo List</h3>
+<h>Add Task</h>
 <form action="{% url 'todo:push_function' %}" method="post">
 {% csrf_token %}
-        <input type="text" name="task_field" size=""><br />
-        <input type="date" name="date_field">
-        
+        <input type="text" name="task_field" size=""><br /></br>
+        <input type="date" name="date_field"></br></br>
         <input type="submit" value="Add" />
 </form>
-
+</center>
+<table style="width:50%">
 {% if todo_list %}
-    <ol>
     {% for task in todo_list %}
-        <li>{{ task.todo_text }} - {{task.add_date|date:"D d M Y"}}
-<a href="{% url "todo:delete" pk=task.id %}">Done</a>
-</li>
-</form>
+         {% if not task.completed %}
+            <tr><td>{{ task.todo_text }}</td>
+            <td>{{task.add_date|date:"D d M Y"}}</td> 
+            <td><a href="{% url "todo:delete" pk=task.id %}"><button>Done</button></a></td>
+            <td><a href="{% url "todo:remove" pk=task.id %}"><button>Delete</button></a></td></tr>        
+         {% elif task.completed%}
+            <tr><td><strike>{{ task.todo_text }}</strike></td>
+            <td><strike>{{task.add_date|date:"D d M Y"}}</strike></td>
+            <td><a href="{% url "todo:add" pk=task.id %}"><button>Not Done</button></a></td>
+            <td><a href="{% url "todo:remove" pk=task.id %}"><button>Delete</button></a></td></tr>
+         {% endif %}
     {% endfor %}
-    </ol>
+</table>
 {% else %}
     <p>No tasks are available.</p>
 {% endif %}
+

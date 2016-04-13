@@ -10,5 +10,3 @@ class Task(models.Model):
     todo_text = models.CharField(max_length=200)
     add_date = models.DateTimeField('Date')
     completed = models.BooleanField(default=False)
-    def __str__(self):
-        return self.todo_text

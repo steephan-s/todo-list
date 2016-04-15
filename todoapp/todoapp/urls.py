@@ -16,5 +16,5 @@ Including another URLconf
 from django.conf.urls import include, url
 
 urlpatterns = [
-    url(r'^todo/', include('todo.urls')),
+    url(r'^api/v1/todo/', include('todo.urls')),
 ]

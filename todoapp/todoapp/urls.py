@@ -14,7 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
+from todo import views
 
 urlpatterns = [
     url(r'^api/v1/todo/', include('todo.urls')),
+    url(r'^index/', views.detail, name='detail'),
 ]

@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from todo import views
+from api import views
+
 
 urlpatterns = [
-    url(r'^api/v1/todo/', include('todo.urls')),
-    url(r'^index/', views.detail, name='detail'),
+    url(r'^api/v1/todo/',include('api.urls') ),
+    url(r'^index/', include('todo.urls')),
 ]

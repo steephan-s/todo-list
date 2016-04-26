@@ -11,6 +11,7 @@
 
 <script type="text/template" id="todo-template">
   <%= todo_text %> - <%= add_date %> - <%= completed %>
+  <button id="delete">Delete</button>
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
@@ -38,8 +39,9 @@ var TodoView = Backbone.View.extend({
             this.template = _.template($("#todo-template").html());
             this.collection.fetch();
             this.collection.bind('reset', this.render, this);
+            this.on('delete', this.remove);
         },
-
+        
         render: function(){
             var renderedContent = this.collection.toJSON();
             this.collection.each(function(todo) {
@@ -53,10 +55,18 @@ var TodoView = Backbone.View.extend({
 var TaskView = Backbone.View.extend({
 	    tagName: 'li',
 	    template: _.template($('#todo-template').html() ),	
+            events: {
+                "click #delete": 'deletefn'
+       },
 	    render: function() {
 		this.$el.html( this.template(this.model.toJSON()) );
 		return this;
-	}
+       },
+            deletefn: function(task){
+                this.remove();
+                this.model.destroy();
+                this.model.trigger('delete', this.model);
+       },
 });
 
 var todoList = new TodoCollection();

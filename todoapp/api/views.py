@@ -4,8 +4,11 @@ from rest_framework import generics
 from django.shortcuts import render
 
 class index(generics.ListCreateAPIView):
+    print("We are inside the index class")
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-
-def detail(request):
-     return render(request, 'todo/detail.html')
+    
+class details(generics.RetrieveUpdateDestroyAPIView):
+    print("We are inside the details class")
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
